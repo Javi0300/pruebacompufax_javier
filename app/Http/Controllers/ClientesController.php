@@ -9,6 +9,7 @@ class ClientesController extends Controller
 {
     public function index()
     {
+        // Funcion que muestra datos siempre que haya, si no arrojara mensaje indicatorio
         $clientes = Clientes::all();
         if(count($clientes) > 0)        
         {
@@ -21,6 +22,8 @@ class ClientesController extends Controller
 
     public function store(Request $request)
     {
+        // Aqui creamos nuevos clientes mediante los (campos) json y
+        // para asegurarnos que se crearon los registros, estan los if que nos informaran el estado del proceso
         $json = $request->json()->all();
         // Creaa clientes
         $clientes = new Clientes();
@@ -42,6 +45,7 @@ class ClientesController extends Controller
 
     public function search($id)
     {
+        // Funcion que busca mediante el id el registro del cliente dado en la url
         $cliente = Clientes::find($id);
 
         if($cliente)
