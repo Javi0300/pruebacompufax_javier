@@ -11,6 +11,7 @@ class OrdenesController extends Controller
 {
     public function index()
     {
+        // Funcion que muestra datos siempre que haya, si no arrojara mensaje indicatorio
         $ordenes = Ordenes::all();
         if(count($ordenes) > 0)        
         {
@@ -23,6 +24,10 @@ class OrdenesController extends Controller
 
     public function store(Request $request)
     {
+        // Al comienzo usamos 2 variables para usarlos como parte del folio
+        // Mediante la funcion mt_rand que nos permite usar aleatoriamente 6 numeros para el folio
+        // Ya luego durante el registro de la orden usamos la variable folio para el campo folio
+        // Por ultimo, hacemos una consulta buscando registros con ese folio y mostramos en pantalla
         $minimo = 100000;
         $maximo = 999999;
         $numeroAleatorio = mt_rand($minimo,$maximo);
@@ -51,6 +56,7 @@ class OrdenesController extends Controller
 
     public function search_id($id)
     {
+        // Buscamos registros de ordenes que coincidan con ids de clientes
         $orden_id = Ordenes::where('cliente_id',$id)->get();
 
         if(count($orden_id) > 0)
@@ -64,6 +70,7 @@ class OrdenesController extends Controller
     }
     public function search_folio($folio)
     {
+        // Buscamos las ordenes que tengan el folio dado, proceso similar al buscar por id
         $folio = Ordenes::where('folio',$folio)->get();
 
         if(count($folio) > 0)
