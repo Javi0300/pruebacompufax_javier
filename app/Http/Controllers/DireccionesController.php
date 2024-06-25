@@ -10,6 +10,7 @@ class DireccionesController extends Controller
 {
     public function index()
     {
+        // Funcion que muestra datos siempre que haya, si no arrojara mensaje indicatorio
         $direcciones = Direcciones::all();
         if(count($direcciones) > 0)        
         {
@@ -22,6 +23,8 @@ class DireccionesController extends Controller
 
     public function update(Request $request)
     {
+        // Funcion que actualiza una direccion dependiendo de la id puesta en la url
+        // Nuevamente si se encuentra un id inexistente, continuara con el proceso
         $json = $request->json()->all();
         $direccion = Direcciones::find($request->id);
         if($direccion)
